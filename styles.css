@@ -403,20 +403,50 @@
 /* Calendar title scales with font size setting */
 .planner-calendar-view .fc .fc-toolbar-title,
 .planner-bases-calendar .fc .fc-toolbar-title {
-  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.6);
+  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.4) !important;
   font-weight: 600;
 }
 
 /* Day header names (Mon, Tue, etc.) scale with font size setting */
 .planner-calendar-view .fc .fc-col-header-cell,
-.planner-bases-calendar .fc .fc-col-header-cell {
-  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.1);
+.planner-bases-calendar .fc .fc-col-header-cell,
+.planner-calendar-view .fc .fc-col-header-cell-cushion,
+.planner-bases-calendar .fc .fc-col-header-cell-cushion {
+  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.1) !important;
 }
 
 /* Day numbers scale with font size setting */
 .planner-calendar-view .fc .fc-daygrid-day-number,
 .planner-bases-calendar .fc .fc-daygrid-day-number {
-  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.2);
+  font-size: var(--planner-calendar-font-size, 10px) !important;
+}
+
+/* Year view (split) month titles scale with font size setting */
+.planner-calendar-view .fc .fc-multimonth-title,
+.planner-bases-calendar .fc .fc-multimonth-title {
+  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.3) !important;
+  font-weight: 600;
+}
+
+/* "More" link scales with font size setting */
+.planner-calendar-view .fc .fc-daygrid-more-link,
+.planner-bases-calendar .fc .fc-daygrid-more-link {
+  font-size: var(--planner-calendar-font-size, 10px) !important;
+}
+
+/* List view elements scale with font size setting */
+.planner-calendar-view .fc .fc-list-day-text,
+.planner-bases-calendar .fc .fc-list-day-text,
+.planner-calendar-view .fc .fc-list-day-side-text,
+.planner-bases-calendar .fc .fc-list-day-side-text {
+  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.1) !important;
+}
+
+.planner-calendar-view .fc .fc-list-event-title,
+.planner-bases-calendar .fc .fc-list-event-title,
+.planner-calendar-view .fc .fc-list-event-time,
+.planner-bases-calendar .fc .fc-list-event-time {
+  font-size: var(--planner-calendar-font-size, 10px) !important;
 }
 
 /* Today indicator - Month view: Circle around day number */
@@ -468,13 +498,19 @@
 /* Week/day view time labels scale with font size setting */
 .planner-calendar-view .fc .fc-timegrid-slot-label,
 .planner-bases-calendar .fc .fc-timegrid-slot-label {
-  font-size: var(--planner-calendar-font-size, 10px);
+  font-size: var(--planner-calendar-font-size, 10px) !important;
+}
+
+/* Week/day view axis (time column) scales with font size setting */
+.planner-calendar-view .fc .fc-timegrid-axis-cushion,
+.planner-bases-calendar .fc .fc-timegrid-axis-cushion {
+  font-size: var(--planner-calendar-font-size, 10px) !important;
 }
 
 /* List view text scales with font size setting */
 .planner-calendar-view .fc .fc-list-day-cushion,
 .planner-bases-calendar .fc .fc-list-day-cushion {
-  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.2);
+  font-size: calc(var(--planner-calendar-font-size, 10px) * 1.2) !important;
 }
 
 .planner-calendar-view .fc .fc-event,
@@ -482,7 +518,7 @@
   cursor: pointer;
   border-radius: 4px;
   padding: 2px 4px;
-  font-size: var(--planner-calendar-font-size, 10px);
+  font-size: var(--planner-calendar-font-size, 10px) !important;
 }
 
 .planner-calendar-view .fc .fc-event:hover,

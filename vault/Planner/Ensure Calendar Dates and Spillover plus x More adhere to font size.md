@@ -1,19 +1,18 @@
 ---
-title: Ensure Calendar Dates and Spillover plus x More adhere to font size
-summary:
+title: Normalize Calendar View Font Sizes
+summary: Improve font size proportions of day numbers and headings to match user-specific font size
 tags:
   - task
-calendar:
-  - Bugfix
+calendar: Optimization
 context:
 people:
 location:
 related:
-status: In-Progress
+status: Done
 priority:
 progress:
 date_created: "2026-02-01T07:15:02.675Z"
-date_modified: "2026-02-01T07:15:02.675Z"
+date_modified: "2026-02-01T07:35:43.320Z"
 date_start_scheduled:
 date_start_actual:
 date_end_scheduled:
@@ -34,4 +33,5 @@ blocked_by:
 cover:
 color:
 ---
+
 ##  Template Test
