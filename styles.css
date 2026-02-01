@@ -419,6 +419,52 @@
   font-size: calc(var(--planner-calendar-font-size, 10px) * 1.2);
 }
 
+/* Today indicator - Month view: Circle around day number */
+.planner-calendar-view .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today .fc-daygrid-day-number,
+.planner-bases-calendar .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today .fc-daygrid-day-number,
+.planner-calendar-view .fc .fc-multiMonthYear-view .fc-daygrid-day.fc-day-today .fc-daygrid-day-number,
+.planner-bases-calendar .fc .fc-multiMonthYear-view .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-radius: 50%;
+  min-width: 1.8em;
+  height: 1.8em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Today indicator - Year continuous scroll view: Pill around day number (e.g., "February 1") */
+.planner-calendar-view .fc .fc-dayGridYear-view .fc-daygrid-day.fc-day-today .fc-daygrid-day-number,
+.planner-bases-calendar .fc .fc-dayGridYear-view .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-radius: 999px;
+  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Today indicator - Week/3-Day views: Pill-shaped header */
+.planner-calendar-view .fc .fc-col-header-cell.fc-day-today .fc-col-header-cell-cushion,
+.planner-bases-calendar .fc .fc-col-header-cell.fc-day-today .fc-col-header-cell-cushion {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* Today indicator - List view: Pill-shaped date on right side only */
+.planner-calendar-view .fc .fc-list-day.fc-day-today .fc-list-day-side-text,
+.planner-bases-calendar .fc .fc-list-day.fc-day-today .fc-list-day-side-text {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
 /* Week/day view time labels scale with font size setting */
 .planner-calendar-view .fc .fc-timegrid-slot-label,
 .planner-bases-calendar .fc .fc-timegrid-slot-label {

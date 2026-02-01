@@ -27,6 +27,19 @@
             "state": {
               "type": "bases",
               "state": {
+                "file": "Bases/Calendar.base",
+                "viewName": "Calendar"
+              },
+              "icon": "calendar-range",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "1daafb8a96d05ec2",
+            "type": "leaf",
+            "state": {
+              "type": "bases",
+              "state": {
                 "file": "Bases/Kanban.base",
                 "viewName": "Kanban"
               },
@@ -35,7 +48,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -200,15 +213,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "b13fedca619908ba",
+  "active": "1daafb8a96d05ec2",
   "lastOpenFiles": [
     "Bases/Calendar.base",
+    "Bases/Kanban.base",
+    "Ideas.md",
+    "Planner/Option to Generate 1 Base with all Four Views.md",
+    "Planner/Fix Settings Menus Spillover on Mobile.md",
     "Templates/Optimization Template.md",
     "Planner/test.md",
     "Templates/Planner Template.md",
     "Templates/Daily Note Template.md",
     "Templates/Feature Template.md",
-    "Bases/Kanban.base",
     "Optimization/test.md",
     "Bases/Timeline.base",
     "Optimization/tse.md",
@@ -222,7 +238,6 @@
     "Planner/Encircle current date value in Calendar View.md",
     "Untitled.md",
     "Planner/Timeline View - Always show title field.md",
-    "Ideas.md",
     "Planner/Add Persona - The Gardener.md",
     "Planner/Reorder Status items in Settings.md",
     "Planner/Reorder Priority items in Settings.md",
@@ -235,8 +250,6 @@
     "Personas/Hobby-Project-Manager/Kanban.base.tmp.49908.1769343625425",
     "Personas/Hobby-Project-Manager/Timeline.base.tmp.49908.1769343623801",
     "Personas/Hobby-Project-Manager/Task List.base.tmp.49908.1769343622235",
-    "Planner/Show empty columns or swimlanes.md",
-    "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
     "ios_item_modal_time_input.png",
     "IMG_0234.png",
     "notes/Screenshot_20260101-185045.png",
