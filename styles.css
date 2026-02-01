@@ -490,6 +490,55 @@
   opacity: 0.9;
 }
 
+/* Compact multi-day event bars (Month/Year views and all-day row in Week/3-Day/Day) */
+.planner-calendar-view .fc .fc-daygrid-event,
+.planner-bases-calendar .fc .fc-daygrid-event,
+.planner-calendar-view .fc .fc-daygrid-block-event,
+.planner-bases-calendar .fc .fc-daygrid-block-event {
+  padding: 0 4px;
+  line-height: calc(var(--planner-calendar-font-size, 10px) * 1.4);
+  min-height: 0;
+  margin-top: 1px;
+  margin-bottom: 0;
+}
+
+.planner-calendar-view .fc .fc-daygrid-event .fc-event-main,
+.planner-bases-calendar .fc .fc-daygrid-event .fc-event-main,
+.planner-calendar-view .fc .fc-daygrid-block-event .fc-event-main,
+.planner-bases-calendar .fc .fc-daygrid-block-event .fc-event-main {
+  padding: 0;
+}
+
+.planner-calendar-view .fc .fc-daygrid-event .fc-event-main-frame,
+.planner-bases-calendar .fc .fc-daygrid-event .fc-event-main-frame,
+.planner-calendar-view .fc .fc-daygrid-block-event .fc-event-main-frame,
+.planner-bases-calendar .fc .fc-daygrid-block-event .fc-event-main-frame {
+  padding: 0;
+  min-height: 0;
+}
+
+.planner-calendar-view .fc .fc-daygrid-event .fc-event-title,
+.planner-bases-calendar .fc .fc-daygrid-event .fc-event-title,
+.planner-calendar-view .fc .fc-daygrid-block-event .fc-event-title,
+.planner-bases-calendar .fc .fc-daygrid-block-event .fc-event-title {
+  padding: 0;
+}
+
+.planner-calendar-view .fc .fc-daygrid-event .fc-event-time,
+.planner-bases-calendar .fc .fc-daygrid-event .fc-event-time,
+.planner-calendar-view .fc .fc-daygrid-block-event .fc-event-time,
+.planner-bases-calendar .fc .fc-daygrid-block-event .fc-event-time {
+  padding: 0;
+  margin: 0;
+}
+
+/* Compact "more" link in day cells */
+.planner-calendar-view .fc .fc-daygrid-more-link,
+.planner-bases-calendar .fc .fc-daygrid-more-link {
+  line-height: calc(var(--planner-calendar-font-size, 10px) * 1.4);
+  margin-top: 1px;
+}
+
 .planner-event-completed {
   opacity: 0.6;
   text-decoration: line-through;

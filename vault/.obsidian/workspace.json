@@ -35,6 +35,20 @@
             }
           },
           {
+            "id": "861a3499e577bb50",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Planner/0.2.0.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "0.2.0"
+            }
+          },
+          {
             "id": "1daafb8a96d05ec2",
             "type": "leaf",
             "state": {
@@ -48,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -182,12 +196,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Bases/Kanban.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Kanban"
             }
           }
         ],
@@ -195,7 +210,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 261.5,
+    "width": 397.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -215,8 +230,13 @@
   },
   "active": "1daafb8a96d05ec2",
   "lastOpenFiles": [
+    "Planner/Reduce height of icon row in Calendar View.md",
+    "Planner/Configure Calendar View Cell Height.md",
     "Bases/Calendar.base",
     "Bases/Kanban.base",
+    "Planner/Reduce Multi-Day Bar Height.md",
+    "Planner/Ensure Calendar Dates and Spillover plus x More adhere to font size.md",
+    "Planner/0.2.0.md",
     "Ideas.md",
     "Planner/Option to Generate 1 Base with all Four Views.md",
     "Planner/Fix Settings Menus Spillover on Mobile.md",
@@ -242,10 +262,6 @@
     "Planner/Reorder Status items in Settings.md",
     "Planner/Reorder Priority items in Settings.md",
     "Planner/Set default tags.md",
-    "Planner/Configure fields shown in Item Modal.md",
-    "Planner/groupBy is reserved keyword in Bases.md",
-    "Planner/Per-Calender Templates.md",
-    "Planner/Rename Existing Calendars.md",
     "Personas/Casual-Planner/Task List.base.tmp.49908.1769343627041",
     "Personas/Hobby-Project-Manager/Kanban.base.tmp.49908.1769343625425",
     "Personas/Hobby-Project-Manager/Timeline.base.tmp.49908.1769343623801",

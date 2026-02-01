@@ -1,21 +1,22 @@
 ---
-title: 0.2.0
-summary: Develop features and fix bugs for version 0.2.0
+title: Ensure Calendar Dates and Spillover plus x More adhere to font size
+summary:
 tags:
-  - event
-calendar: Documentation
+  - task
+calendar:
+  - Bugfix
 context:
 people:
 location:
 related:
 status: In-Progress
-priority: Medium
+priority:
 progress:
-date_created: "2026-01-19T17:51:44.768Z"
-date_modified: "2026-02-01T06:57:30.978Z"
-date_start_scheduled: "2026-01-18T00:00:00-05:00"
+date_created: "2026-02-01T07:15:02.675Z"
+date_modified: "2026-02-01T07:15:02.675Z"
+date_start_scheduled:
 date_start_actual:
-date_end_scheduled: "2026-02-15T00:00:00-05:00"
+date_end_scheduled:
 date_end_actual:
 all_day: false
 repeat_frequency:
@@ -33,3 +34,4 @@ blocked_by:
 cover:
 color:
 ---
+##  Template Test
