@@ -1,22 +1,23 @@
 ---
-title: Reduce Multi-Day Bar Height
-summary: Compact Calendar View bars to make more events visible in a cell.
+title: Replace Relevant View Dropdowns with Sliders
+summary: Obsidian Bases supports using sliders
 tags:
   - task
   - optimization
-calendar: Optimization
+calendar:
+  - Optimization
 context:
 people:
 location:
 related:
-status: Done
-priority:
+status: Idea
+priority: Medium
 progress:
-date_created: "2026-02-01T07:17:21.247Z"
-date_modified: "2026-02-01T07:46:07.922Z"
-date_start_scheduled: "2026-02-01T12:46:04.788Z"
+date_created: "2026-02-01T07:55:17.394Z"
+date_modified: "2026-02-01T07:55:17.394Z"
+date_start_scheduled:
 date_start_actual:
-date_end_scheduled: "2026-02-01T12:46:06.692Z"
+date_end_scheduled:
 date_end_actual:
 all_day: false
 repeat_frequency:
@@ -34,5 +35,4 @@ blocked_by:
 cover:
 color:
 ---
-
 ##  Optimization

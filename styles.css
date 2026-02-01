@@ -428,6 +428,24 @@
   font-weight: 600;
 }
 
+/* Year view (continuous) configurable row height */
+.planner-bases-calendar .fc .fc-dayGridYear-view .fc-daygrid-day-frame {
+  min-height: var(--planner-year-continuous-row-height, 60px) !important;
+}
+
+.planner-bases-calendar .fc .fc-dayGridYear-view .fc-daygrid-day {
+  min-height: var(--planner-year-continuous-row-height, 60px) !important;
+}
+
+.planner-bases-calendar .fc .fc-dayGridYear-view .fc-daygrid-day-events {
+  min-height: calc(var(--planner-year-continuous-row-height, 60px) - 24px) !important;
+}
+
+/* Year view (split by month) configurable row height */
+.planner-bases-calendar .fc .fc-multiMonthYear-view .fc-daygrid-day-frame {
+  min-height: var(--planner-year-split-row-height, 60px);
+}
+
 /* "More" link scales with font size setting */
 .planner-calendar-view .fc .fc-daygrid-more-link,
 .planner-bases-calendar .fc .fc-daygrid-more-link {

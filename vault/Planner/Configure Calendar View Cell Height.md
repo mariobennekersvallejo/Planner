@@ -1,6 +1,6 @@
 ---
-title: Configure Calendar View Cell Height
-summary: Add a slider to configure month and year mode cell heights
+title: Configure Calendar View Cell Heights
+summary: Add sliders to configure month and year mode cell heights
 tags:
   - feature
   - task
@@ -9,11 +9,11 @@ context:
 people:
 location:
 related:
-status: To-Do
+status: Done
 priority:
 progress:
-date_created: 2026-02-01T07:19:46.945Z
-date_modified: 2026-02-01T12:19:51.374Z
+date_created: "2026-02-01T07:19:46.945Z"
+date_modified: "2026-02-01T08:01:49.268Z"
 date_start_scheduled:
 date_start_actual:
 date_end_scheduled:
@@ -34,4 +34,5 @@ blocked_by:
 cover:
 color:
 ---
+
 ##  Feature

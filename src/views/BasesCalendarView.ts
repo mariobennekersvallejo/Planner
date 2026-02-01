@@ -142,6 +142,16 @@ export class BasesCalendarView extends BasesView {
     return value || 'note.date_end_scheduled';
   }
 
+  private getYearContinuousRowHeight(): number {
+    const value = this.config.get('yearContinuousRowHeight') as number | undefined;
+    return value ?? 60;
+  }
+
+  private getYearSplitRowHeight(): number {
+    const value = this.config.get('yearSplitRowHeight') as number | undefined;
+    return value ?? 60;
+  }
+
   // Keyboard navigation event handlers
   private keyboardEventHandlers: { event: string; handler: EventListener }[] = [];
 
@@ -421,6 +431,10 @@ export class BasesCalendarView extends BasesView {
 
     // Apply font size CSS variable
     this.calendarEl.style.setProperty('--planner-calendar-font-size', `${this.plugin.settings.calendarFontSize}px`);
+
+    // Apply year view row height CSS variables
+    this.calendarEl.style.setProperty('--planner-year-continuous-row-height', `${this.getYearContinuousRowHeight()}px`);
+    this.calendarEl.style.setProperty('--planner-year-split-row-height', `${this.getYearSplitRowHeight()}px`);
 
     // Set today button icon
     const todayBtn = this.calendarEl?.querySelector('.fc-todayButton-button');
@@ -1426,6 +1440,24 @@ export function createCalendarViewRegistration(plugin: PlannerPlugin): BasesView
         placeholder: 'Select property',
         filter: (propId: BasesPropertyId) =>
           PropertyTypeService.isDateProperty(propId, plugin.app),
+      },
+      {
+        type: 'slider',
+        key: 'yearContinuousRowHeight',
+        displayName: 'Year view (continuous) row height',
+        min: 40,
+        max: 150,
+        step: 10,
+        default: 60,
+      },
+      {
+        type: 'slider',
+        key: 'yearSplitRowHeight',
+        displayName: 'Year view (split) row height',
+        min: 40,
+        max: 150,
+        step: 10,
+        default: 60,
       },
     ],
   };

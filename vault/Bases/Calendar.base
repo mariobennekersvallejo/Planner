@@ -49,5 +49,7 @@ views:
       - title
     sort: []
     colorBy: note.calendar
+    yearSplitRowHeight: 90
+    yearContinuousRowHeight: 120
   - type: table
     name: Table
