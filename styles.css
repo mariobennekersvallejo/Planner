@@ -198,6 +198,48 @@
   white-space: nowrap;
 }
 
+/* ── Progress bar (Task List - pill style) ──────────────────── */
+.planner-tasklist-progress-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 4px 0;
+}
+
+.planner-tasklist-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--interactive-accent);
+  border-radius: 12px;
+  padding: 2px 8px;
+  width: 100%;
+}
+
+.planner-tasklist-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--progress-percent, 100%);
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.50);
+  pointer-events: none;
+  border-radius: 0 12px 12px 0;
+}
+
+.planner-tasklist-progress-label {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-on-accent);
+  white-space: nowrap;
+}
+
 /* ── Progress bar (Kanban cards) ────────────────────────────── */
 .planner-kanban-card-progress-wrapper {
   display: flex;

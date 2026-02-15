@@ -8,15 +8,15 @@ context:
 people:
 location:
 related:
-status: In-Progress
+status: Done
 priority: High
-progress_current: 75
+progress_current: 100
 progress_total: 100
-date_created: "2026-01-17T18:34:38.142Z"
-date_modified: "2026-02-15T18:31:48.926Z"
-date_start_scheduled: "2026-02-15T06:00:00-05:00"
+date_created: 2026-01-17T18:34:38.142Z
+date_modified: 2026-02-15T23:42:54.162Z
+date_start_scheduled: 2026-02-15T06:00:00-05:00
 date_start_actual:
-date_end_scheduled: "2026-02-15T17:09:35-05:00"
+date_end_scheduled: 2026-02-15T17:09:35-05:00
 date_end_actual:
 all_day: false
 repeat_frequency:

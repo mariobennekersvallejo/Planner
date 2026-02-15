@@ -10,16 +10,16 @@ context:
 people:
 location:
 related:
-status: Idea
-priority:
+status: Done
+priority: Urgent
 progress_current:
 progress_total:
-date_created: 2026-02-15T17:15:13.447Z
-date_modified: 2026-02-15T22:34:51.382Z
-date_start_scheduled: 2026-02-15T17:18:19-05:00
+date_created: "2026-02-15T17:15:13.447Z"
+date_modified: "2026-02-15T18:32:31.000Z"
+date_start_scheduled: "2026-02-15T17:18:19-05:00"
 date_start_actual:
-date_end_scheduled: 2026-02-15T22:18:06.483Z
-date_end_actual:
+date_end_scheduled: "2026-02-15T22:18:06.483Z"
+date_end_actual: "2026-02-15T18:32:31.000Z"
 all_day: false
 repeat_frequency:
 repeat_interval:

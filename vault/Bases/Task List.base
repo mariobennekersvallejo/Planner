@@ -63,5 +63,6 @@ views:
         direction: DESC
       - property: priority
         direction: ASC
+    progressLabel: both
   - type: table
     name: Table

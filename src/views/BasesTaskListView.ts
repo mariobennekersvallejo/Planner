@@ -439,21 +439,19 @@ export class BasesTaskListView extends BasesView {
       return;
     }
 
-    if (propName === 'progress_current' && this.getShowProgress() && entry) {
-      // Use getNumericValue which has frontmatter fallback for when Bases doesn't have the property
+    if (propName === 'progress_current' && entry) {
+      // Always show progress bar when progress_current column is enabled
       const current = this.getNumericValue(entry, 'note.progress_current');
       if (current !== null) {
         const total = this.getNumericValue(entry, 'note.progress_total') ?? undefined;
         const pct = computeProgressPercent(current, total);
         if (pct !== null) {
-          const wrapper = cell.createDiv({ cls: 'planner-progress-wrapper' });
-          const bar = wrapper.createDiv({ cls: 'planner-progress-bar' });
-          const fill = bar.createDiv({ cls: 'planner-progress-fill' });
-          fill.setCssProps({ '--progress-width': `${pct}%` });
+          // Create inner wrapper for progress bar with proper spacing
+          const wrapper = cell.createDiv({ cls: 'planner-tasklist-progress-wrapper' });
+          const bar = wrapper.createDiv({ cls: 'planner-tasklist-progress-bar' });
+          bar.setCssProps({ '--progress-percent': `${pct}%` });
           const label = formatProgressLabel(current, total, this.getProgressLabel());
-          if (label) {
-            wrapper.createSpan({ text: label, cls: 'planner-progress-text' });
-          }
+          bar.createSpan({ text: label || `${Math.round(pct)}%`, cls: 'planner-tasklist-progress-label' });
         }
       }
       return;

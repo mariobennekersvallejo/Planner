@@ -55,6 +55,5 @@ views:
     badgePlacement: properties-section
     showProgress: true
     progressLabel: percentage
-    swimlaneBy: note.calendar
   - type: table
     name: Table

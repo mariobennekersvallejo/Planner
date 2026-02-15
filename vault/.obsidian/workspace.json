@@ -88,7 +88,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -254,13 +254,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "b13fedca619908ba",
+  "active": "a6da692d382bf119",
   "lastOpenFiles": [
+    "Bases/Calendar.base",
     "Bases/Kanban.base",
     "Bases/Timeline.base",
-    "Bases/Calendar.base",
-    "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
     "Bases/Task List.base",
+    "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
     "Planner/Remember scroll position after updating Item.md",
     "Planner/0.2.0.md",
     "Planner/test.md",
