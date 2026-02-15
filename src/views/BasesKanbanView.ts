@@ -209,6 +209,14 @@ export class BasesKanbanView extends BasesView {
     return (value as SwimHeaderDisplay) || 'vertical';
   }
 
+  private getShowEmptySwimlanes(): boolean {
+    const value = this.config.get('showEmptySwimlanes') as string | boolean | undefined;
+    if (typeof value === 'string') {
+      return value !== 'false';
+    }
+    return value ?? true;
+  }
+
   private getCustomColumnOrder(): string[] {
     const value = this.config.get('columnOrder') as string | undefined;
     if (!value) return [];
@@ -805,6 +813,11 @@ export class BasesKanbanView extends BasesView {
       for (const key of groups.keys()) {
         if (!defaultKeys.includes(key)) defaultKeys.push(key);
       }
+    } else if (propName === 'calendar') {
+      defaultKeys = this.plugin.settings.calendars.map(c => c.name);
+      for (const key of groups.keys()) {
+        if (!defaultKeys.includes(key)) defaultKeys.push(key);
+      }
     } else {
       defaultKeys = Array.from(groups.keys()).sort();
     }
@@ -845,6 +858,11 @@ export class BasesKanbanView extends BasesView {
       }
     } else if (propName === 'priority') {
       defaultKeys = this.plugin.settings.priorities.map(p => p.name);
+      for (const key of swimlaneKeys) {
+        if (!defaultKeys.includes(key)) defaultKeys.push(key);
+      }
+    } else if (propName === 'calendar') {
+      defaultKeys = this.plugin.settings.calendars.map(c => c.name);
       for (const key of swimlaneKeys) {
         if (!defaultKeys.includes(key)) defaultKeys.push(key);
       }
@@ -1016,7 +1034,11 @@ export class BasesKanbanView extends BasesView {
     }
 
     // Get ordered swimlane keys
-    const orderedSwimlaneKeys = this.getOrderedSwimlaneKeys(swimlaneKeys, swimlaneBy);
+    const showEmptySwimlanes = this.getShowEmptySwimlanes();
+    let orderedSwimlaneKeys = this.getOrderedSwimlaneKeys(swimlaneKeys, swimlaneBy);
+    if (!showEmptySwimlanes) {
+      orderedSwimlaneKeys = orderedSwimlaneKeys.filter(key => (swimlaneCounts.get(key) || 0) > 0);
+    }
 
     // Render each swimlane row
     for (const swimlaneKey of orderedSwimlaneKeys) {
@@ -2899,6 +2921,12 @@ export function createKanbanViewRegistration(plugin: PlannerPlugin): BasesViewRe
           'horizontal': 'Horizontal',
           'vertical': 'Vertical',
         },
+      },
+      {
+        type: 'toggle',
+        key: 'showEmptySwimlanes',
+        displayName: 'Show empty swimlanes',
+        default: true,
       },
     ],
   };

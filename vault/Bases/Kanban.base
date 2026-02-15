@@ -50,5 +50,7 @@ views:
     borderStyle: left-accent
     badgePlacement: properties-section
     swimlaneBy: note.calendar
+    showEmptySwimlanes: false
+    plannerGroupBy: note.status
   - type: table
     name: Table
