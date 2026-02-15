@@ -10,9 +10,11 @@ import {
   PriorityContextMenu,
   CalendarContextMenu,
   RecurrenceContextMenu,
+  ProgressContextMenu,
   type RecurrenceData,
 } from './menus';
 import { CustomRecurrenceModal } from './CustomRecurrenceModal';
+import { CustomProgressModal } from './CustomProgressModal';
 import { FileLinkSuggest, TagSuggest, ContextSuggest, convertToSimpleWikilinks, convertWikilinksToRelativePaths, createTagChipInput } from './suggests';
 import { isOngoing } from '../utils/dateUtils';
 import { readItemTemplate } from '../utils/templateUtils';
@@ -60,6 +62,8 @@ export class ItemModal extends Modal {
   private blockedBy: string[] = [];
   private details = '';
   private tags: string[] = [];
+  private progressCurrent: number | null = null;
+  private progressTotal: number | null = null;
   private originalCalendar: string | null = null; // Track original calendar for move detection
   private originalValues: Partial<ItemFrontmatter> = {}; // Track original values for change detection in edit mode
 
@@ -133,6 +137,10 @@ export class ItemModal extends Modal {
         };
       }
 
+      // Load progress data
+      this.progressCurrent = item.progress_current ?? null;
+      this.progressTotal = item.progress_total ?? null;
+
       // Store original values for change detection in edit mode
       // These are the values as loaded from the note, before any user modifications
       this.originalValues = {
@@ -156,6 +164,8 @@ export class ItemModal extends Modal {
         repeat_bysetpos: item.repeat_bysetpos,
         repeat_until: item.repeat_until,
         repeat_count: item.repeat_count,
+        progress_current: item.progress_current ?? null,
+        progress_total: item.progress_total ?? null,
       };
     }
 
@@ -433,6 +443,15 @@ export class ItemModal extends Modal {
       'Recurrence',
       (el, event) => this.showRecurrenceContextMenu(event),
       'recurrence'
+    );
+
+    // Progress icon
+    this.createActionIcon(
+      this.actionBar,
+      'chart-pie',
+      'Progress',
+      (el, event) => this.showProgressContextMenu(event),
+      'progress'
     );
 
     // Calendar icon
@@ -783,6 +802,17 @@ export class ItemModal extends Modal {
       this.updateIconState(recurrenceIcon as HTMLElement, hasRecurrence, hasRecurrence ? 'Recurring' : 'Recurrence');
     }
 
+    // Progress
+    const progressIcon = this.actionBar.querySelector('[data-type="progress"]');
+    if (progressIcon) {
+      const hasProgress = this.progressCurrent !== null && this.progressCurrent > 0;
+      const total = this.progressTotal ?? 100;
+      const current = this.progressCurrent ?? 0;
+      const percentage = total > 0 ? Math.round((current / total) * 100) : 0;
+      const tooltip = hasProgress ? `${percentage}% complete` : 'Progress';
+      this.updateIconState(progressIcon as HTMLElement, hasProgress, tooltip);
+    }
+
     // Calendar
     const calendarIcon = this.actionBar.querySelector('[data-type="calendar"]');
     if (calendarIcon) {
@@ -893,6 +923,57 @@ export class ItemModal extends Modal {
       },
       plugin: this.plugin,
       referenceDate,
+    });
+    menu.show(event);
+  }
+
+  private showProgressContextMenu(event: MouseEvent | KeyboardEvent): void {
+    const menu = new ProgressContextMenu({
+      currentValue: this.progressCurrent,
+      totalValue: this.progressTotal,
+      onSelect: (value) => {
+        this.progressCurrent = value;
+        // Set a default total of 100 if not already set
+        if (this.progressTotal === null) {
+          this.progressTotal = 100;
+        }
+        this.updateIconStates();
+        this.updateNLPPreview();
+      },
+      onAdjust: (deltaPercent) => {
+        // Calculate adjustment from current authoritative state
+        const total = this.progressTotal ?? 100;
+        const current = this.progressCurrent ?? 0;
+        const adjustment = Math.round(total * (deltaPercent / 100));
+        const newValue = Math.max(0, Math.min(total, current + adjustment));
+        this.progressCurrent = newValue;
+        if (this.progressTotal === null) {
+          this.progressTotal = 100;
+        }
+        this.updateIconStates();
+        this.updateNLPPreview();
+      },
+      onCustom: () => {
+        const modal = new CustomProgressModal(
+          this.plugin,
+          this.progressCurrent,
+          this.progressTotal,
+          (result) => {
+            this.progressCurrent = result.current;
+            this.progressTotal = result.total;
+            this.updateIconStates();
+            this.updateNLPPreview();
+          }
+        );
+        modal.open();
+      },
+      onClear: () => {
+        // Set to null to remove progress entirely (not just set to 0)
+        this.progressCurrent = null;
+        this.progressTotal = null;
+        this.updateIconStates();
+        this.updateNLPPreview();
+      },
     });
     menu.show(event);
   }
@@ -1498,6 +1579,14 @@ export class ItemModal extends Modal {
       frontmatter.repeat_count = undefined;
     }
 
+    // Handle progress fields
+    if (this.progressCurrent !== orig.progress_current) {
+      frontmatter.progress_current = this.progressCurrent ?? undefined;
+    }
+    if (this.progressTotal !== orig.progress_total) {
+      frontmatter.progress_total = this.progressTotal ?? undefined;
+    }
+
     return frontmatter;
   }
 
@@ -1538,6 +1627,10 @@ export class ItemModal extends Modal {
       if (this.recurrence.repeat_until) frontmatter.repeat_until = this.recurrence.repeat_until;
       if (this.recurrence.repeat_count) frontmatter.repeat_count = this.recurrence.repeat_count;
     }
+
+    // Progress fields
+    if (this.progressCurrent !== null) frontmatter.progress_current = this.progressCurrent;
+    if (this.progressTotal !== null) frontmatter.progress_total = this.progressTotal;
 
     return frontmatter;
   }

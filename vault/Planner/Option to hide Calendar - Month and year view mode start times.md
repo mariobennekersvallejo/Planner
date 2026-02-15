@@ -14,11 +14,11 @@ status: Idea
 priority:
 progress_current:
 progress_total:
-date_created: "2026-02-15T17:15:13.447Z"
-date_modified: "2026-02-15T17:15:37.710Z"
-date_start_scheduled: "2026-02-15T22:15:35.340Z"
+date_created: 2026-02-15T17:15:13.447Z
+date_modified: 2026-02-15T22:34:51.382Z
+date_start_scheduled: 2026-02-15T17:18:19-05:00
 date_start_actual:
-date_end_scheduled: "2026-02-15T22:15:27.694Z"
+date_end_scheduled: 2026-02-15T22:18:06.483Z
 date_end_actual:
 all_day: false
 repeat_frequency:

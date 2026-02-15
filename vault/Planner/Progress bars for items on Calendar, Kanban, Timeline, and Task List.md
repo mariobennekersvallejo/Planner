@@ -13,10 +13,10 @@ priority: High
 progress_current: 75
 progress_total:
 date_created: 2026-01-17T18:34:38.142Z
-date_modified: 2026-02-15T22:16:40.381Z
-date_start_scheduled: 2026-02-15T06:30:00-05:00
+date_modified: 2026-02-15T22:34:47.911Z
+date_start_scheduled: 2026-02-15T06:00:00-05:00
 date_start_actual:
-date_end_scheduled: 2026-02-16T16:39:35-05:00
+date_end_scheduled: 2026-02-15T17:09:35-05:00
 date_end_actual:
 all_day: false
 repeat_frequency:

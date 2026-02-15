@@ -1536,6 +1536,38 @@ body.is-mobile .modal:has(.planner-item-modal) {
   min-width: 120px;
 }
 
+/* Custom Progress Modal */
+.planner-custom-progress-modal {
+  padding: 20px;
+  min-width: 320px;
+}
+
+.planner-custom-progress-modal h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.planner-progress-separator {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.planner-custom-progress-modal .setting-item {
+  border-top: none;
+  padding: 8px 0;
+}
+
+.planner-custom-progress-modal .setting-item-info {
+  flex: 1;
+}
+
+.planner-custom-progress-modal .setting-item-control input {
+  width: 80px;
+  text-align: right;
+}
+
 /* Summary Input */
 .planner-summary-container {
   margin-bottom: 16px;

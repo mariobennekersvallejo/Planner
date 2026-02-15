@@ -1,5 +1,5 @@
 ---
-title: Add 'All Day' as an option in Item Modal start and end menus
+title: Add progress menu to Item Modal
 summary: This is a feature
 tags:
   - feature
@@ -14,8 +14,8 @@ status: Idea
 priority:
 progress_current:
 progress_total:
-date_created: "2026-02-15T17:16:09.947Z"
-date_modified: "2026-02-15T17:16:09.947Z"
+date_created: "2026-02-15T17:34:05.949Z"
+date_modified: "2026-02-15T17:34:05.949Z"
 date_start_scheduled: 2026-02-15
 date_start_actual:
 date_end_scheduled: 2026-02-16

@@ -35,20 +35,6 @@
             }
           },
           {
-            "id": "73a94eddca4a655a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Planner/Progress Example.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Progress Example"
-            }
-          },
-          {
             "id": "a6da692d382bf119",
             "type": "leaf",
             "state": {
@@ -271,22 +257,25 @@
   },
   "active": "b13fedca619908ba",
   "lastOpenFiles": [
+    "Planner/example.md",
+    "Bases/Calendar.base",
+    "Planner/0.2.0.md",
+    "DailyNotes/2026-04-07.md",
+    "DailyNotes",
+    "Planner/Add progress menu to Item Modal.md",
+    "Planner/test.md",
+    "Planner/Progress Example.md",
     "Planner/Add 'All Day' as an option in Item Modal start and end menus.md",
     "Planner/Option to hide Calendar - Month and year view mode start times.md",
-    "Planner/Progress Example.md",
-    "Bases/Calendar.base",
     "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
     "Bases/Kanban.base",
     "Bases/Task List.base",
-    "Planner/0.2.0.md",
     "Bases/Timeline.base",
-    "Planner/test.md",
     "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md.tmp.5693.1771159962864",
     "Bases/Untitled.base",
     "TaskNotes/Views/calendar-default.base",
     "TaskNotes/Views/relationships.base",
     "TaskNotes/Views/agenda-default.base",
-    "TaskNotes/Views/tasks-default.base",
     "Screenshot_20260215-063627.png",
     "Planner/Replace Relevant View Dropdowns with Sliders.md",
     "DailyNotes/2026-01-16.md",
@@ -306,10 +295,6 @@
     "Templates/Feature Template.md",
     "Optimization/test.md",
     "Optimization/tse.md",
-    "Planner/Untitled.md",
-    "Planner/tests.md",
-    "Feature/Feature Item Test.md",
-    "Feature/tesssst.md",
     "ios_item_modal_time_input.png",
     "IMG_0234.png",
     "notes/Screenshot_20260101-185045.png",
