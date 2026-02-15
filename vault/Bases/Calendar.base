@@ -54,6 +54,7 @@ views:
     sort: []
     colorBy: note.calendar
     showProgress: true
-    progressLabel: percentage
+    progressLabel: both
+    yearContinuousRowHeight: 110
   - type: table
     name: Table

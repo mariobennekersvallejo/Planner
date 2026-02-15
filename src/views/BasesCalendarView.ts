@@ -442,17 +442,108 @@ export class BasesCalendarView extends BasesView {
         const total = this.getNumericValue(entry, 'note.progress_total') ?? undefined;
         const pct = computeProgressPercent(current, total);
         if (pct === null) return;
+
+        // Determine view type for stripe direction
+        const viewType = info.view.type;
+        const isTimeGrid = viewType.includes('timeGrid');
+        const isDayGrid = viewType.includes('dayGrid') || viewType.includes('multiMonth');
+        const isAllDay = info.event.allDay;
+
+        // Get event dates
+        const eventStart = info.event.start;
+        const eventEnd = info.event.end || eventStart;
+        if (!eventStart || !eventEnd) return;
+
+        // Calculate total event duration in ms
+        const totalDurationMs = eventEnd.getTime() - eventStart.getTime();
+        const oneDayMs = 24 * 60 * 60 * 1000;
+        const isMultiDay = totalDurationMs > oneDayMs;
+
+        // Add base progress class
         info.el.classList.add('planner-event-progress');
-        info.el.style.setProperty('--progress-percent', `${pct}%`);
+
+        // Add direction class based on view type and event type
+        if (isTimeGrid && !isAllDay) {
+          info.el.classList.add('planner-event-progress--vertical');
+        } else {
+          info.el.classList.add('planner-event-progress--horizontal');
+        }
+
+        // Calculate segment-relative progress for multi-day events
+        let segmentProgress = pct;
+        if (isMultiDay) {
+          // Detect segment bounds based on view type and DOM structure
+          let segStart: Date | null = null;
+          let segEnd: Date | null = null;
+
+          if (isDayGrid) {
+            // For daygrid views, find the week row this segment is in
+            // by looking at the parent row's day cells with data-date attributes
+            const rowEl = info.el.closest('.fc-daygrid-body tr, .fc-scrollgrid-sync-table tr');
+            if (rowEl) {
+              const dayCells = rowEl.querySelectorAll('[data-date]');
+              if (dayCells.length > 0) {
+                const firstDate = dayCells[0].getAttribute('data-date');
+                const lastDate = dayCells[dayCells.length - 1].getAttribute('data-date');
+                if (firstDate && lastDate) {
+                  const rowStart = new Date(firstDate);
+                  // Row end is the END of the last day (start of next day)
+                  const rowEnd = new Date(lastDate);
+                  rowEnd.setDate(rowEnd.getDate() + 1);
+
+                  // Segment bounds are the intersection of event and row
+                  segStart = new Date(Math.max(eventStart.getTime(), rowStart.getTime()));
+                  segEnd = new Date(Math.min(eventEnd.getTime(), rowEnd.getTime()));
+                }
+              }
+            }
+          } else if (isTimeGrid && !isAllDay) {
+            // For timegrid timed events, find the day column from closest day container
+            const colEl = info.el.closest('.fc-timegrid-col');
+            const dateAttr = colEl?.getAttribute('data-date');
+            if (dateAttr) {
+              const dayStart = new Date(dateAttr);
+              const dayEnd = new Date(dateAttr);
+              dayEnd.setDate(dayEnd.getDate() + 1);
+
+              // Segment bounds are intersection of event times and this day
+              segStart = new Date(Math.max(eventStart.getTime(), dayStart.getTime()));
+              segEnd = new Date(Math.min(eventEnd.getTime(), dayEnd.getTime()));
+            }
+          }
+
+          // Calculate segment progress if we found valid segment bounds
+          if (segStart && segEnd && segEnd > segStart) {
+            // Calculate where this segment falls in the overall event (0-100%)
+            const segStartOffset = segStart.getTime() - eventStart.getTime();
+            const segEndOffset = segEnd.getTime() - eventStart.getTime();
+
+            const segStartPct = (segStartOffset / totalDurationMs) * 100;
+            const segEndPct = (segEndOffset / totalDurationMs) * 100;
+            const segRangePct = segEndPct - segStartPct;
+
+            // Calculate how much of this segment is complete
+            if (pct <= segStartPct) {
+              // Progress hasn't reached this segment yet
+              segmentProgress = 0;
+            } else if (pct >= segEndPct) {
+              // Progress has passed this entire segment
+              segmentProgress = 100;
+            } else {
+              // Progress falls within this segment
+              segmentProgress = ((pct - segStartPct) / segRangePct) * 100;
+            }
+          }
+        }
+
+        info.el.style.setProperty('--progress-percent', `${segmentProgress}%`);
+
+        // Append progress label to title with separator
         const label = formatProgressLabel(current, total, this.getProgressLabel());
         if (label) {
-          const labelEl = info.el.createSpan({ cls: 'planner-event-progress-label', text: label });
-          // Position after the title content inside the event
-          const mainFrame = info.el.querySelector('.fc-event-main-frame, .fc-event-main');
-          if (mainFrame) {
-            mainFrame.appendChild(labelEl);
-          } else {
-            info.el.appendChild(labelEl);
+          const titleEl = info.el.querySelector('.fc-event-title');
+          if (titleEl && titleEl.textContent) {
+            titleEl.textContent = `${titleEl.textContent} · ${label}`;
           }
         }
       },
