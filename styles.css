@@ -167,7 +167,13 @@
   color: var(--text-muted);
 }
 
-/* Progress bar */
+/* ── Progress bar (Task List) ───────────────────────────────── */
+.planner-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .planner-progress-bar {
   display: inline-block;
   width: 60px;
@@ -175,7 +181,7 @@
   background: var(--background-modifier-border);
   border-radius: 3px;
   overflow: hidden;
-  margin-right: 6px;
+  flex-shrink: 0;
   vertical-align: middle;
 }
 
@@ -189,6 +195,67 @@
 .planner-progress-text {
   font-size: 11px;
   color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Progress bar (Kanban cards) ────────────────────────────── */
+.planner-kanban-card-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 2px;
+}
+
+.planner-kanban-card-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--background-modifier-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.planner-kanban-card-progress-fill {
+  height: 100%;
+  width: var(--progress-width, 0%);
+  background: var(--interactive-accent);
+  border-radius: 2px;
+}
+
+/* ── Progress (Calendar events) ─────────────────────────────── */
+/*
+ * Completed portion: solid event colour (the normal background).
+ * Incomplete portion: diagonal stripes overlaid via ::after pseudo-element,
+ * starting at --progress-percent from the left.
+ */
+.planner-event-progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.planner-event-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--progress-percent, 100%);
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0.22) 6px
+  );
+  pointer-events: none;
+}
+
+.planner-event-progress-label {
+  font-size: 10px;
+  opacity: 0.85;
+  margin-left: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Bases Task List View */

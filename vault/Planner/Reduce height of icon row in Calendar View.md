@@ -4,17 +4,16 @@ summary: This is an optimization
 tags:
   - task
   - optimization
-calendar:
-  - Optimization
+calendar: Optimization
 context:
 people:
 location:
 related:
-status: To-Do
+status: Idea
 priority:
 progress:
-date_created: "2026-02-01T07:20:52.810Z"
-date_modified: "2026-02-01T07:20:52.810Z"
+date_created: 2026-02-01T07:20:52.810Z
+date_modified: 2026-02-15T12:20:21.991Z
 date_start_scheduled:
 date_start_actual:
 date_end_scheduled:

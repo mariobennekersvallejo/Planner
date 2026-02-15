@@ -73,6 +73,7 @@ import { RRule } from 'rrule';
 import type PlannerPlugin from '../main';
 import { getCalendarColor, type OpenBehavior } from '../types/settings';
 import type { PlannerItem, DayOfWeek } from '../types/item';
+import { computeProgressPercent, formatProgressLabel, toRawNumber } from '../types/item';
 import { openItemModal } from '../components/ItemModal';
 import { PropertyTypeService } from '../services/PropertyTypeService';
 import { isOngoing } from '../utils/dateUtils';
@@ -80,6 +81,7 @@ import { isOngoing } from '../utils/dateUtils';
 export const BASES_CALENDAR_VIEW_ID = 'planner-calendar';
 
 type CalendarViewType = 'multiMonthYear' | 'dayGridYear' | 'dayGridMonth' | 'timeGridWeek' | 'timeGridThreeDay' | 'timeGridDay' | 'listWeek';
+type ProgressLabelFormat = 'fraction' | 'percentage' | 'both' | 'none';
 
 /**
  * Solarized Accent Colors (for fields without predefined colors)
@@ -150,6 +152,43 @@ export class BasesCalendarView extends BasesView {
   private getYearSplitRowHeight(): number {
     const value = this.config.get('yearSplitRowHeight') as number | undefined;
     return value ?? 60;
+  }
+
+  private getShowProgress(): boolean {
+    const value = this.config.get('showProgress') as string | boolean | undefined;
+    if (typeof value === 'string') return value === 'true';
+    return value ?? false;
+  }
+
+  private getProgressLabel(): ProgressLabelFormat {
+    const val = this.config.get('progressLabel') as string | undefined;
+    if (val === 'percentage' || val === 'both' || val === 'none') return val;
+    return 'fraction';
+  }
+
+  /**
+   * Get a numeric value from an entry, falling back to frontmatter if Bases doesn't return it.
+   * This handles cases where the .base file doesn't have the property defined.
+   */
+  private getNumericValue(entry: BasesEntry, propId: string): number | null {
+    // Try Bases getValue first
+    const basesValue = entry.getValue(propId as BasesPropertyId);
+    const rawFromBases = toRawNumber(basesValue);
+    if (rawFromBases !== null) {
+      return rawFromBases;
+    }
+
+    // Fall back to reading frontmatter directly
+    const propName = propId.replace(/^note\./, '');
+    const fm = this.getFrontmatter(entry);
+    if (fm) {
+      const fmValue = fm[propName];
+      if (typeof fmValue === 'number') {
+        return fmValue;
+      }
+    }
+
+    return null;
   }
 
   // Keyboard navigation event handlers
@@ -394,6 +433,29 @@ export class BasesCalendarView extends BasesView {
       eventDrop: (info) => { void this.handleEventDrop(info); },
       eventResize: (info) => { void this.handleEventResize(info); },
       select: (info) => this.handleDateSelect(info),
+      eventDidMount: (info) => {
+        if (!this.getShowProgress()) return;
+        const entry = info.event.extendedProps.entry as BasesEntry | undefined;
+        if (!entry) return;
+        const current = this.getNumericValue(entry, 'note.progress_current');
+        if (current === null) return;
+        const total = this.getNumericValue(entry, 'note.progress_total') ?? undefined;
+        const pct = computeProgressPercent(current, total);
+        if (pct === null) return;
+        info.el.classList.add('planner-event-progress');
+        info.el.style.setProperty('--progress-percent', `${pct}%`);
+        const label = formatProgressLabel(current, total, this.getProgressLabel());
+        if (label) {
+          const labelEl = info.el.createSpan({ cls: 'planner-event-progress-label', text: label });
+          // Position after the title content inside the event
+          const mainFrame = info.el.querySelector('.fc-event-main-frame, .fc-event-main');
+          if (mainFrame) {
+            mainFrame.appendChild(labelEl);
+          } else {
+            info.el.appendChild(labelEl);
+          }
+        }
+      },
       dayHeaderDidMount: (arg) => {
         // Make day header clickable in day/week views to open daily note
         const el = arg.el;
@@ -1458,6 +1520,24 @@ export function createCalendarViewRegistration(plugin: PlannerPlugin): BasesView
         max: 150,
         step: 10,
         default: 60,
+      },
+      {
+        type: 'toggle',
+        key: 'showProgress',
+        displayName: 'Show progress',
+        default: false,
+      },
+      {
+        type: 'dropdown',
+        key: 'progressLabel',
+        displayName: 'Progress label',
+        default: 'fraction',
+        options: {
+          'fraction': 'Fraction (32/350)',
+          'percentage': 'Percentage (9%)',
+          'both': 'Both (32/350, 9%)',
+          'none': 'None (bar only)',
+        },
       },
     ],
   };

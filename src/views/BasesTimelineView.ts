@@ -97,6 +97,12 @@ export class BasesTimelineView extends BasesView {
     return value;
   }
 
+  private getShowProgress(): boolean {
+    const value = this.config?.get('showProgress') as string | boolean | undefined;
+    if (typeof value === 'string') return value === 'true';
+    return value ?? false;
+  }
+
   constructor(
     controller: QueryController,
     containerEl: HTMLElement,
@@ -251,6 +257,7 @@ export class BasesTimelineView extends BasesView {
       dateStartField: this.getDateStartField(),
       dateEndField: this.getDateEndField(),
       titleField: this.getTitleField(),
+      showProgress: this.getShowProgress(),
     };
 
     // Adapt entries to Markwhen format
@@ -515,6 +522,12 @@ export function createTimelineViewRegistration(plugin: PlannerPlugin): BasesView
           '#282a36': 'Dracula',
           '#1e1e1e': 'VS Code Dark',
         },
+      },
+      {
+        type: 'toggle',
+        key: 'showProgress',
+        displayName: 'Show progress',
+        default: false,
       },
     ],
   };

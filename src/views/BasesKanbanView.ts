@@ -11,7 +11,10 @@ import {
 } from 'obsidian';
 import type PlannerPlugin from '../main';
 import type { ItemFrontmatter } from '../types/item';
+import { computeProgressPercent, formatProgressLabel, toRawNumber } from '../types/item';
 import { openItemModal } from '../components/ItemModal';
+
+type ProgressLabelFormat = 'fraction' | 'percentage' | 'both' | 'none';
 import { PropertyTypeService } from '../services/PropertyTypeService';
 import {
   getStatusConfig,
@@ -129,6 +132,18 @@ export class BasesKanbanView extends BasesView {
   private getTitleBy(): string {
     const value = this.config.get('titleBy') as string | undefined;
     return value || 'note.title';
+  }
+
+  private getShowProgress(): boolean {
+    const value = this.config.get('showProgress') as string | boolean | undefined;
+    if (typeof value === 'string') return value === 'true';
+    return value ?? false;
+  }
+
+  private getProgressLabel(): ProgressLabelFormat {
+    const val = this.config.get('progressLabel') as string | undefined;
+    if (val === 'percentage' || val === 'both' || val === 'none') return val;
+    return 'fraction';
   }
 
   private getBorderStyle(): BorderStyle {
@@ -1936,6 +1951,25 @@ export class BasesKanbanView extends BasesView {
       this.renderBadges(titleRow, entry);
     }
 
+    // Progress bar - only shown when showProgress is enabled and progress_current is set
+    if (this.getShowProgress()) {
+      const current = toRawNumber(this.getEntryValue(entry, 'note.progress_current'));
+      if (current !== null) {
+        const total = toRawNumber(this.getEntryValue(entry, 'note.progress_total')) ?? undefined;
+        const pct = computeProgressPercent(current, total);
+        if (pct !== null) {
+          const progressWrapper = content.createDiv({ cls: 'planner-kanban-card-progress-wrapper' });
+          const bar = progressWrapper.createDiv({ cls: 'planner-kanban-card-progress-bar' });
+          bar.createDiv({ cls: 'planner-kanban-card-progress-fill' })
+            .setCssProps({ '--progress-width': `${pct}%` });
+          const label = formatProgressLabel(current, total, this.getProgressLabel());
+          if (label) {
+            progressWrapper.createSpan({ text: label, cls: 'planner-progress-text' });
+          }
+        }
+      }
+    }
+
     // Summary - only show if configured and visible (CSS class handles all styles)
     const summaryField = this.getSummaryField();
     const visibleProps = this.getVisibleProperties();
@@ -2927,6 +2961,24 @@ export function createKanbanViewRegistration(plugin: PlannerPlugin): BasesViewRe
         key: 'showEmptySwimlanes',
         displayName: 'Show empty swimlanes',
         default: true,
+      },
+      {
+        type: 'toggle',
+        key: 'showProgress',
+        displayName: 'Show progress',
+        default: false,
+      },
+      {
+        type: 'dropdown',
+        key: 'progressLabel',
+        displayName: 'Progress label',
+        default: 'fraction',
+        options: {
+          'fraction': 'Fraction (32/350)',
+          'percentage': 'Percentage (9%)',
+          'both': 'Both (32/350, 9%)',
+          'none': 'None (bar only)',
+        },
       },
     ],
   };
