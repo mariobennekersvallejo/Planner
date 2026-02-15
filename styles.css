@@ -225,18 +225,18 @@
 /*
  * Continuous progress display for calendar events.
  * Completed portion: solid event colour (the normal background).
- * Incomplete portion: diagonal stripes overlaid via ::after pseudo-element.
+ * Incomplete portion: semi-transparent overlay via ::after pseudo-element.
  *
  * Two modes:
- * - Horizontal (daygrid/all-day): stripes start at --progress-percent from left
- * - Vertical (timegrid/timed): stripes start at --progress-percent from top
+ * - Horizontal (daygrid/all-day): overlay starts at --progress-percent from left
+ * - Vertical (timegrid/timed): overlay starts at --progress-percent from top
  */
 .planner-event-progress {
   position: relative;
   overflow: hidden;
 }
 
-/* Horizontal progress (daygrid views, all-day events) - stripes left to right */
+/* Horizontal progress (daygrid views, all-day events) - transparent overlay left to right */
 .planner-event-progress--horizontal::after {
   content: '';
   position: absolute;
@@ -244,17 +244,11 @@
   left: var(--progress-percent, 100%);
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.22) 3px,
-    rgba(0, 0, 0, 0.22) 6px
-  );
+  background: rgba(0, 0, 0, 0.50);
   pointer-events: none;
 }
 
-/* Vertical progress (timegrid views, timed events) - diagonal stripes top to bottom */
+/* Vertical progress (timegrid views, timed events) - transparent overlay top to bottom */
 .planner-event-progress--vertical::after {
   content: '';
   position: absolute;
@@ -262,13 +256,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.22) 3px,
-    rgba(0, 0, 0, 0.22) 6px
-  );
+  background: rgba(0, 0, 0, 0.50);
   pointer-events: none;
 }
 
