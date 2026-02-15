@@ -38,14 +38,13 @@
             "id": "a6da692d382bf119",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "Planner/0.2.0.md",
-                "mode": "source",
-                "source": false
+                "file": "Bases/Kanban.base",
+                "viewName": "Kanban"
               },
-              "icon": "lucide-file",
-              "title": "0.2.0"
+              "icon": "square-kanban",
+              "title": "Kanban"
             }
           },
           {
@@ -257,20 +256,21 @@
   },
   "active": "b13fedca619908ba",
   "lastOpenFiles": [
-    "Planner/example.md",
-    "Bases/Calendar.base",
+    "Bases/Timeline.base",
+    "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
+    "Bases/Task List.base",
+    "Bases/Kanban.base",
+    "Planner/Remember scroll position after updating Item.md",
     "Planner/0.2.0.md",
+    "Bases/Calendar.base",
+    "Planner/test.md",
+    "Planner/example.md",
     "DailyNotes/2026-04-07.md",
     "DailyNotes",
     "Planner/Add progress menu to Item Modal.md",
-    "Planner/test.md",
     "Planner/Progress Example.md",
     "Planner/Add 'All Day' as an option in Item Modal start and end menus.md",
     "Planner/Option to hide Calendar - Month and year view mode start times.md",
-    "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
-    "Bases/Kanban.base",
-    "Bases/Task List.base",
-    "Bases/Timeline.base",
     "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md.tmp.5693.1771159962864",
     "Bases/Untitled.base",
     "TaskNotes/Views/calendar-default.base",
@@ -294,7 +294,6 @@
     "Templates/Daily Note Template.md",
     "Templates/Feature Template.md",
     "Optimization/test.md",
-    "Optimization/tse.md",
     "ios_item_modal_time_input.png",
     "IMG_0234.png",
     "notes/Screenshot_20260101-185045.png",

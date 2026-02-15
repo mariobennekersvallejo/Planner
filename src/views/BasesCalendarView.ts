@@ -166,6 +166,12 @@ export class BasesCalendarView extends BasesView {
     return 'fraction';
   }
 
+  private getShowStartTime(): boolean {
+    const value = this.config.get('showStartTime') as string | boolean | undefined;
+    if (typeof value === 'string') return value === 'true';
+    return value ?? false;
+  }
+
   /**
    * Get a numeric value from an entry, falling back to frontmatter if Bases doesn't return it.
    * This handles cases where the .base file doesn't have the property defined.
@@ -331,6 +337,15 @@ export class BasesCalendarView extends BasesView {
           type: 'timeGrid',
           duration: { days: 3 },
           buttonText: '3',
+        },
+        multiMonthYear: {
+          displayEventTime: this.getShowStartTime(),
+        },
+        dayGridYear: {
+          displayEventTime: this.getShowStartTime(),
+        },
+        dayGridMonth: {
+          displayEventTime: this.getShowStartTime(),
         },
       },
       customButtons: {
@@ -1616,6 +1631,12 @@ export function createCalendarViewRegistration(plugin: PlannerPlugin): BasesView
         type: 'toggle',
         key: 'showProgress',
         displayName: 'Show progress',
+        default: false,
+      },
+      {
+        type: 'toggle',
+        key: 'showStartTime',
+        displayName: 'Show start time',
         default: false,
       },
       {
