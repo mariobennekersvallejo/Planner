@@ -887,32 +887,30 @@
   margin-bottom: 8px;
 }
 
-.planner-status-item .setting-item-control,
-.planner-priority-item .setting-item-control {
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
 /* Hide the empty setting-item-info on status/priority items */
 .planner-status-item .setting-item-info,
 .planner-priority-item .setting-item-info {
   display: none;
 }
 
-/* First row: drag handle + name fills the line */
-.planner-status-item .setting-item-control input[type="text"]:first-of-type,
-.planner-priority-item .setting-item-control input[type="text"]:first-of-type {
+/* Mobile: wrap status/priority items into two lines */
+.is-mobile .planner-status-item .setting-item-control,
+.is-mobile .planner-priority-item .setting-item-control {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.is-mobile .planner-status-item .setting-item-control input[type="text"]:first-of-type,
+.is-mobile .planner-priority-item .setting-item-control input[type="text"]:first-of-type {
   flex: 1 0 calc(100% - 50px);
 }
 
-/* Second row items get consistent sizing */
-.planner-status-item .setting-item-control input[type="text"]:nth-of-type(2),
-.planner-priority-item .setting-item-control input[type="text"]:nth-of-type(2) {
+.is-mobile .planner-status-item .setting-item-control input[type="text"]:nth-of-type(2),
+.is-mobile .planner-priority-item .setting-item-control input[type="text"]:nth-of-type(2) {
   flex: 1 1 auto;
 }
 
-/* Weight input for priorities */
-.planner-priority-item .setting-item-control input[type="text"]:nth-of-type(3) {
+.is-mobile .planner-priority-item .setting-item-control input[type="text"]:nth-of-type(3) {
   flex: 0 1 60px;
 }
 
@@ -2485,7 +2483,6 @@ body.is-mobile .planner-timeline-iframe-container {
 .planner-calendar-item .setting-item-control {
   width: 100%;
   gap: 6px;
-  flex-wrap: wrap;
 }
 
 /* Hide the empty setting-item-info to reclaim space */
@@ -2493,14 +2490,17 @@ body.is-mobile .planner-timeline-iframe-container {
   display: none;
 }
 
-/* First row: drag handle + name fills the line */
-.planner-calendar-item .setting-item-control input[type="text"]:first-of-type {
+/* Mobile: wrap calendar items into two lines */
+.is-mobile .planner-calendar-item .setting-item-control {
+  flex-wrap: wrap;
+}
+
+.is-mobile .planner-calendar-item .setting-item-control input[type="text"]:first-of-type {
   flex: 1 0 calc(100% - 50px);
 }
 
-/* Second row: template and folder inputs share space */
-.planner-calendar-item .planner-calendar-template-input,
-.planner-calendar-item .planner-calendar-folder-input {
+.is-mobile .planner-calendar-item .planner-calendar-template-input,
+.is-mobile .planner-calendar-item .planner-calendar-folder-input {
   flex: 1 1 auto;
 }
 
