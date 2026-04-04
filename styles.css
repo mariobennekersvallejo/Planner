@@ -887,8 +887,33 @@
   margin-bottom: 8px;
 }
 
-.planner-status-item .setting-item-control {
-  flex-wrap: nowrap;
+.planner-status-item .setting-item-control,
+.planner-priority-item .setting-item-control {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Hide the empty setting-item-info on status/priority items */
+.planner-status-item .setting-item-info,
+.planner-priority-item .setting-item-info {
+  display: none;
+}
+
+/* First row: drag handle + name fills the line */
+.planner-status-item .setting-item-control input[type="text"]:first-of-type,
+.planner-priority-item .setting-item-control input[type="text"]:first-of-type {
+  flex: 1 0 calc(100% - 50px);
+}
+
+/* Second row items get consistent sizing */
+.planner-status-item .setting-item-control input[type="text"]:nth-of-type(2),
+.planner-priority-item .setting-item-control input[type="text"]:nth-of-type(2) {
+  flex: 1 1 auto;
+}
+
+/* Weight input for priorities */
+.planner-priority-item .setting-item-control input[type="text"]:nth-of-type(3) {
+  flex: 0 1 60px;
 }
 
 .planner-status-item,
@@ -2454,19 +2479,29 @@ body.is-mobile .planner-timeline-iframe-container {
 .planner-calendar-item {
   cursor: grab;
   transition: background-color 0.15s ease, opacity 0.15s ease;
-  border-radius: 4px;
-  padding-left: 0;
+  overflow: hidden;
 }
 
 .planner-calendar-item .setting-item-control {
   width: 100%;
-  gap: 8px;
-  padding-left: 0;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
-/* Push folder, color picker, and delete to the right */
+/* Hide the empty setting-item-info to reclaim space */
+.planner-calendar-item .setting-item-info {
+  display: none;
+}
+
+/* First row: drag handle + name fills the line */
+.planner-calendar-item .setting-item-control input[type="text"]:first-of-type {
+  flex: 1 0 calc(100% - 50px);
+}
+
+/* Second row: template and folder inputs share space */
+.planner-calendar-item .planner-calendar-template-input,
 .planner-calendar-item .planner-calendar-folder-input {
-  margin-left: auto;
+  flex: 1 1 auto;
 }
 
 .planner-calendar-item:hover {
