@@ -38,13 +38,12 @@
             "id": "a6da692d382bf119",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "image",
               "state": {
-                "file": "Bases/Kanban.base",
-                "viewName": "Kanban"
+                "file": "Screenshot_20260403-212943.png"
               },
-              "icon": "square-kanban",
-              "title": "Kanban"
+              "icon": "lucide-image",
+              "title": "Screenshot_20260403-212943"
             }
           },
           {
@@ -256,8 +255,15 @@
   },
   "active": "a6da692d382bf119",
   "lastOpenFiles": [
-    "Bases/Calendar.base",
     "Bases/Kanban.base",
+    "Screenshot_20260403-212943.png",
+    "Planner/Hide Start Time in Calendar View on Mobile.md",
+    "Planner/Create Issue Templates.md",
+    "Planner/Add 'All Day' as an option in Item Modal start and end menus.md",
+    "Planner/Add Plus Buttons to Kanban without Swimlanes.md",
+    "Planner/Add Planner frontmatter to current Note.md",
+    "Planner/Start and End Modal Options - Default to All Day.md",
+    "Bases/Calendar.base",
     "Bases/Timeline.base",
     "Bases/Task List.base",
     "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md",
@@ -269,7 +275,6 @@
     "DailyNotes",
     "Planner/Add progress menu to Item Modal.md",
     "Planner/Progress Example.md",
-    "Planner/Add 'All Day' as an option in Item Modal start and end menus.md",
     "Planner/Option to hide Calendar - Month and year view mode start times.md",
     "Planner/Progress bars for items on Calendar, Kanban, Timeline, and Task List.md.tmp.5693.1771159962864",
     "Bases/Untitled.base",
@@ -289,17 +294,11 @@
     "Planner/Ensure Calendar Dates and Spillover plus x More adhere to font size.md",
     "Planner/Option to Generate 1 Base with all Four Views.md",
     "Planner/Fix Settings Menus Spillover on Mobile.md",
-    "Templates/Optimization Template.md",
-    "Templates/Planner Template.md",
-    "Templates/Daily Note Template.md",
-    "Templates/Feature Template.md",
-    "Optimization/test.md",
     "ios_item_modal_time_input.png",
     "IMG_0234.png",
     "notes/Screenshot_20260101-185045.png",
     "notes/Screenshot_20260101-185036.png",
     "notes/Screenshot_20260101-184811.png",
-    "notes/Screenshot_20260101-184627.png",
-    "notes/Pasted image 20260101091932.png"
+    "notes/Screenshot_20260101-184627.png"
   ]
 }

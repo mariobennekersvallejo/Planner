@@ -397,6 +397,10 @@ export class PlannerSettingTab extends PluginSettingTab {
 
   private renderStatusItem(containerEl: HTMLElement, status: StatusConfig, index: number): void {
     const setting = new Setting(containerEl)
+      .addExtraButton(button => button
+        .setIcon('grip-vertical')
+        .setTooltip('Drag to reorder')
+        .extraSettingsEl.addClass('planner-drag-handle'))
       .addText(text => text
         .setValue(status.name)
         .setPlaceholder('Status name')
@@ -434,6 +438,43 @@ export class PlannerSettingTab extends PluginSettingTab {
         }));
 
     setting.settingEl.addClass('planner-status-item');
+    setting.settingEl.setAttribute('data-index', String(index));
+    setting.settingEl.setAttribute('draggable', 'true');
+
+    // Drag and drop handlers
+    setting.settingEl.addEventListener('dragstart', (e: DragEvent) => {
+      setting.settingEl.addClass('planner-dragging');
+      e.dataTransfer?.setData('text/plain', String(index));
+    });
+
+    setting.settingEl.addEventListener('dragend', () => {
+      setting.settingEl.removeClass('planner-dragging');
+    });
+
+    setting.settingEl.addEventListener('dragover', (e: DragEvent) => {
+      e.preventDefault();
+      setting.settingEl.addClass('planner-drag-over');
+    });
+
+    setting.settingEl.addEventListener('dragleave', () => {
+      setting.settingEl.removeClass('planner-drag-over');
+    });
+
+    setting.settingEl.addEventListener('drop', (e: DragEvent) => {
+      e.preventDefault();
+      setting.settingEl.removeClass('planner-drag-over');
+
+      const fromIndex = parseInt(e.dataTransfer?.getData('text/plain') || '-1', 10);
+      const toIndex = index;
+
+      if (fromIndex === -1 || fromIndex === toIndex) return;
+
+      const statuses = this.plugin.settings.statuses;
+      const [moved] = statuses.splice(fromIndex, 1);
+      statuses.splice(toIndex, 0, moved);
+
+      void this.plugin.saveSettings().then(() => this.refreshCurrentTab());
+    });
   }
 
   private renderPriorityList(containerEl: HTMLElement): void {
@@ -462,6 +503,10 @@ export class PlannerSettingTab extends PluginSettingTab {
 
   private renderPriorityItem(containerEl: HTMLElement, priority: PriorityConfig, index: number): void {
     const setting = new Setting(containerEl)
+      .addExtraButton(button => button
+        .setIcon('grip-vertical')
+        .setTooltip('Drag to reorder')
+        .extraSettingsEl.addClass('planner-drag-handle'))
       .addText(text => text
         .setValue(priority.name)
         .setPlaceholder('Priority name')
@@ -499,6 +544,43 @@ export class PlannerSettingTab extends PluginSettingTab {
         }));
 
     setting.settingEl.addClass('planner-priority-item');
+    setting.settingEl.setAttribute('data-index', String(index));
+    setting.settingEl.setAttribute('draggable', 'true');
+
+    // Drag and drop handlers
+    setting.settingEl.addEventListener('dragstart', (e: DragEvent) => {
+      setting.settingEl.addClass('planner-dragging');
+      e.dataTransfer?.setData('text/plain', String(index));
+    });
+
+    setting.settingEl.addEventListener('dragend', () => {
+      setting.settingEl.removeClass('planner-dragging');
+    });
+
+    setting.settingEl.addEventListener('dragover', (e: DragEvent) => {
+      e.preventDefault();
+      setting.settingEl.addClass('planner-drag-over');
+    });
+
+    setting.settingEl.addEventListener('dragleave', () => {
+      setting.settingEl.removeClass('planner-drag-over');
+    });
+
+    setting.settingEl.addEventListener('drop', (e: DragEvent) => {
+      e.preventDefault();
+      setting.settingEl.removeClass('planner-drag-over');
+
+      const fromIndex = parseInt(e.dataTransfer?.getData('text/plain') || '-1', 10);
+      const toIndex = index;
+
+      if (fromIndex === -1 || fromIndex === toIndex) return;
+
+      const priorities = this.plugin.settings.priorities;
+      const [moved] = priorities.splice(fromIndex, 1);
+      priorities.splice(toIndex, 0, moved);
+
+      void this.plugin.saveSettings().then(() => this.refreshCurrentTab());
+    });
   }
 
   private renderCalendarColors(containerEl: HTMLElement): void {

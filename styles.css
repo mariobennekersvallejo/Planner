@@ -891,6 +891,23 @@
   flex-wrap: nowrap;
 }
 
+.planner-status-item,
+.planner-priority-item {
+  cursor: grab;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.planner-status-item.planner-dragging,
+.planner-priority-item.planner-dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.planner-status-item.planner-drag-over,
+.planner-priority-item.planner-drag-over {
+  background-color: color-mix(in srgb, var(--interactive-accent) 20%, transparent);
+}
+
 /* ============================================
    Item Modal Styles
    ============================================ */
