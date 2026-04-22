@@ -25,6 +25,28 @@ import type { PlannerSettings } from '../types/settings';
 import type { PlannerItem, DayOfWeek } from '../types/item';
 
 /**
+ * Replace Obsidian wikilinks in a string with their display text:
+ *   [[target|alias]] → alias
+ *   [[target]]       → basename of target (no .md extension)
+ *   [[folder/file]]  → file
+ * Leaves any surrounding text intact. Useful when a timeline title comes
+ * from a formula that concatenates link-typed properties (e.g. a
+ * "Name · status · assignee" title built in a .base file), which would
+ * otherwise render as `Name · status · [[Pablo]]` in the Markwhen
+ * timeline UI.
+ */
+function cleanWikilinks(text: string): string {
+  return text.replace(
+    /\[\[([^|\]]+)(?:\|([^\]]+))?\]\]/g,
+    (_match, target: string, alias?: string) => {
+      if (alias) return alias;
+      const basename = target.split('/').pop() ?? target;
+      return basename.replace(/\.md$/, '');
+    }
+  );
+}
+
+/**
  * Safely convert any value to a string, handling objects properly
  * Avoids [object Object] output for complex types
  */
@@ -304,8 +326,12 @@ export class MarkwhenAdapter {
     // Parse end date - default to start date if not set
     const endDate = this.parseDate(endValue) || startDate;
 
-    // Get title
-    const title = titleValue?.toString() || entry.file.basename;
+    // Get title. Apply cleanWikilinks so that link-typed values embedded
+    // in the title (directly or via a formula) render as display text
+    // rather than raw [[...]] syntax.
+    const title = cleanWikilinks(
+      titleValue?.toString() || entry.file.basename
+    );
 
     // Get tags from note
     const tagsValue = entry.getValue('note.tags');
