@@ -474,10 +474,10 @@ export class MarkwhenAdapter {
 
     if (Array.isArray(value)) {
       const firstVal: unknown = value[0];
-      return firstVal ? safeToString(firstVal).replace(/^#/, '') : 'Unsectioned';
+      return firstVal ? cleanWikilinks(safeToString(firstVal).replace(/^#/, '')) : 'Unsectioned';
     }
 
-    return safeToString(value);
+    return cleanWikilinks(safeToString(value));
   }
 
   /**
@@ -513,10 +513,10 @@ export class MarkwhenAdapter {
 
     if (Array.isArray(value)) {
       const firstVal: unknown = value[0];
-      return firstVal ? safeToString(firstVal).replace(/^#/, '') : 'Ungrouped';
+      return firstVal ? cleanWikilinks(safeToString(firstVal).replace(/^#/, '')) : 'Ungrouped';
     }
 
-    return safeToString(value);
+    return cleanWikilinks(safeToString(value));
   }
 
   /**
@@ -537,10 +537,10 @@ export class MarkwhenAdapter {
 
     if (Array.isArray(value)) {
       const firstVal: unknown = value[0];
-      return firstVal ? safeToString(firstVal).replace(/^#/, '') : undefined;
+      return firstVal ? cleanWikilinks(safeToString(firstVal).replace(/^#/, '')) : undefined;
     }
 
-    return safeToString(value);
+    return cleanWikilinks(safeToString(value));
   }
 
   /**
