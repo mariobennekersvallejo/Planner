@@ -823,11 +823,11 @@ export class MarkwhenAdapter {
           if (Array.isArray(value)) {
             const first: unknown = value[0];
             if (first) {
-              const firstVal = safeToString(first).replace(/^#/, '');
+              const firstVal = cleanWikilinks(safeToString(first).replace(/^#/, ''));
               if (firstVal) uniqueValues.add(firstVal);
             }
           } else {
-            uniqueValues.add(safeToString(value));
+            uniqueValues.add(cleanWikilinks(safeToString(value)));
           }
         }
       }
