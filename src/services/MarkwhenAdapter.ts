@@ -16,6 +16,7 @@ import {
   TimelineGroupBy,
   TimelineSectionsBy,
   TimelineColorBy,
+  TimelineDateLabel,
   PathMapping,
   EventPath,
   Recurrence,
@@ -75,6 +76,7 @@ export interface AdapterOptions {
   dateStartField: string;
   dateEndField: string;
   titleField: string;
+  dateLabel?: TimelineDateLabel;
 }
 
 /**
@@ -108,6 +110,7 @@ export class MarkwhenAdapter {
   private settings: PlannerSettings;
   private app: App;
   private pathMappings: PathMapping[] = [];
+  private currentDateLabel: TimelineDateLabel = 'start';
 
   constructor(settings: PlannerSettings, app: App) {
     this.settings = settings;
@@ -119,6 +122,7 @@ export class MarkwhenAdapter {
    */
   adapt(entries: BasesEntry[], options: AdapterOptions): AdaptedResult {
     this.pathMappings = [];
+    this.currentDateLabel = options.dateLabel || 'start';
 
     // Convert entries to timeline events
     const timelineEvents = this.entriesToTimelineEvents(entries, options);
@@ -714,7 +718,11 @@ export class MarkwhenAdapter {
    * Convert a TimelineEvent to a Markwhen Event
    */
   private timelineEventToMarkwhenEvent(event: TimelineEvent): Event {
-    const datePart = event.dateRangeIso.fromDateTimeIso.split('T')[0];
+    const labelIso =
+      this.currentDateLabel === 'end'
+        ? event.dateRangeIso.toDateTimeIso || event.dateRangeIso.fromDateTimeIso
+        : event.dateRangeIso.fromDateTimeIso;
+    const datePart = labelIso.split('T')[0];
 
     // Create a minimal Event object that Markwhen Timeline can render
     const mwEvent: Event = {
